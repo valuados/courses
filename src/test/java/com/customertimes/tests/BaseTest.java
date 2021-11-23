@@ -1,4 +1,4 @@
-package com.customertimes;
+package com.customertimes.tests;
 
 import com.customertimes.framework.driver.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
