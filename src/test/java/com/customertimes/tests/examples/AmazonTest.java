@@ -1,6 +1,7 @@
-package com.customertimes.tests;
+package com.customertimes.tests.examples;
 
 import com.customertimes.framework.config.TestConfig;
+import com.customertimes.tests.BaseTest;
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

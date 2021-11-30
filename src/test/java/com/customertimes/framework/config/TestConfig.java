@@ -11,4 +11,5 @@ public interface TestConfig extends Config {
     @DefaultValue("chrome")
     String browser();
     String email();
+    String password();
 }
