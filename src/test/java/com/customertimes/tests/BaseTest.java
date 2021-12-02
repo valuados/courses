@@ -21,27 +21,18 @@ public class BaseTest {
     protected String email = TestConfig.CONFIG.email();
     protected String password = TestConfig.CONFIG.password();
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
     public void setup() {
         System.out.println("Tests automation is started");
-    }
-
-    @BeforeMethod(alwaysRun = true)
-    public void beforeMethod() {
         driver = getWebDriver();
         soft = new SoftAssert();
-        wait = new WebDriverWait(driver, 5);
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void afterMethod() {
-        WebDriverRunner.closeWebDriver();
-
-    }
-
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void tearDown() {
+
         System.out.println("Tests automation is ended");
+        WebDriverRunner.closeWebDriver();
     }
 
 }

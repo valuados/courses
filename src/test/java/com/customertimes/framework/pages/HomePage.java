@@ -12,14 +12,16 @@ import static com.customertimes.framework.driver.WebDriverRunner.getWebDriver;
 
 public class HomePage extends AbstractPage {
 
-    WebDriverWait wait = new WebDriverWait(driver, TIME_OUT);
+    WebDriverWait wait;
 
     private static String accountButton = "//span[contains(text(),'Аккаунт')]";
     private static String loginButton = "//button[@class='userToolsBtn']";
     private static String userSubtitleSpan = "//span[@class='userToolsSubtitle']";
 
     public HomePage(WebDriver driver) {
+
         super(driver);
+        wait = new WebDriverWait(driver, TIME_OUT);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class HomePage extends AbstractPage {
 
     public boolean doesUserSubtitleSpanContainEmail(String email) {
         try {
-        WebElement userSubtitle = wait.until(ExpectedConditions.visibilityOf(getWebDriver().findElement(By.xpath(userSubtitleSpan))));
+        WebElement userSubtitle = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(userSubtitleSpan))));
         return userSubtitle.getText().equals(email);
         } catch (NoSuchElementException e) {
             return false;

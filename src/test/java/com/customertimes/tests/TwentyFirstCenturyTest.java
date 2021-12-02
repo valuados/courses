@@ -3,7 +3,9 @@ package com.customertimes.tests;
 import com.customertimes.framework.pages.HomePage;
 import com.customertimes.model.User;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -11,18 +13,19 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 
-import static com.customertimes.framework.driver.WebDriverRunner.getWebDriver;
 
 public class TwentyFirstCenturyTest extends BaseTest {
 
     private static final String TWENTY_FIRST_CENTURY_URL = "https://www.21vek.by/";
     User user;
-    HomePage homePage = new HomePage(getWebDriver());
+    HomePage homePage;
 
     @BeforeClass
     public void beforeClassMethod() {
+        //driver = WebDriverRunner.getWebDriver();
+        homePage = new HomePage(driver);
         user = User.newBuilder().withEmail(email).withPassword(password).build();
-        getWebDriver().get(TWENTY_FIRST_CENTURY_URL);
+        driver.get(TWENTY_FIRST_CENTURY_URL);
     }
 
     @Test(description = "Verify login to 21vek.by")
@@ -36,31 +39,20 @@ public class TwentyFirstCenturyTest extends BaseTest {
                 String.format("User subtitle span should contain '%s' email", user.getEmail()));
     }
 
-//
-//        wait = new WebDriverWait(getWebDriver(), 5);
-//        boolean result = wait.until((ExpectedCondition<Boolean>) driver -> {
-//            JavascriptExecutor js = (JavascriptExecutor) driver;
-//            if (js.executeScript("return document.readyState;").equals("complete")){
-//                return Boolean.TRUE;
-//            }
-//            return Boolean.FALSE;
-//        });
-
     @AfterMethod
     private void afterMethod(Method method) {
         switch (method.getName()) {
             case "loginToTwentyFirstCenturyTest":
-                getWebDriver().navigate().refresh();
-                wait.until((ExpectedCondition<Boolean>) driver -> {
-                    JavascriptExecutor js = (JavascriptExecutor) driver;
-                    if (js.executeScript("return document.readyState;").equals("complete")) {
-                        return Boolean.TRUE;
-                    }
-                    return Boolean.FALSE;
-                });
+                driver.navigate().refresh();
+                waitForLoad(driver);
                 break;
             default:
                 System.out.println("All other tests");
         }
+    }
+
+    void waitForLoad(WebDriver driver) {
+        new WebDriverWait(driver, 10).until((ExpectedCondition<Boolean>) wd ->
+                ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 }

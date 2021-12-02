@@ -16,10 +16,12 @@ public class LoginPage extends AbstractPage {
     private static String submitAuthorizationButton = "//div[@class='style_actions__2mIsz']/button";
 
 
-    WebDriverWait wait = new WebDriverWait(driver, TIME_OUT);
+    WebDriverWait wait;
 
     public LoginPage(WebDriver driver) {
+
         super(driver);
+        wait = new WebDriverWait(driver, TIME_OUT);
     }
 
     @Override
@@ -32,8 +34,8 @@ public class LoginPage extends AbstractPage {
     }
 
     public void enterPassword(String password) {
-        driver.findElement(By.xpath(emailInput)).clear();
-        driver.findElement(By.xpath(emailInput)).sendKeys(password);
+        driver.findElement(By.xpath(passwordInput)).clear();
+        driver.findElement(By.xpath(passwordInput)).sendKeys(password);
     }
 
     public void submitCredentials() {
@@ -42,7 +44,7 @@ public class LoginPage extends AbstractPage {
 
     public HomePage waitForSubmitAuthorizationButtonDisappear() {
         try{
-            wait.until(ExpectedConditions.stalenessOf(getWebDriver().findElement(By.xpath(submitAuthorizationButton))));
+            wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath(submitAuthorizationButton))));
             return new HomePage(driver);
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException("'Submit Authorization' Button was not found");

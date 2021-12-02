@@ -24,9 +24,9 @@ public class GoogleTest extends BaseTest {
 
     @BeforeClass
     public void setup() {
-        //getWebDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         soft = new SoftAssert();
-        wait = new WebDriverWait(getWebDriver(), 5);
+        wait = new WebDriverWait(driver, 5);
         prepareTestData();
     }
 
@@ -42,7 +42,7 @@ public class GoogleTest extends BaseTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String googleTitle = getWebDriver().getTitle();
+        String googleTitle = driver.getTitle();
         String expectedTitle = "Google";
         soft.assertEquals(googleTitle, expectedTitle, String.format("Page title should be '%1$s' instead of '%2$s'", googleTitle, expectedTitle));
 
@@ -51,10 +51,10 @@ public class GoogleTest extends BaseTest {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
 
-        getWebDriver().findElement(By.name("q")).sendKeys(Keys.chord(Keys.COMMAND, "v"));
-        getWebDriver().findElement(By.name("q")).sendKeys(Keys.ENTER);
+        driver.findElement(By.name("q")).sendKeys(Keys.chord(Keys.COMMAND, "v"));
+        driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
 
-        wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(getWebDriver().findElement(By.xpath("//button[@aria-label='Google Search']")))));
+        wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@aria-label='Google Search']")))));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@aria-label='Google Search']")));
 
         try {
@@ -78,7 +78,7 @@ public class GoogleTest extends BaseTest {
     }
 
     private void prepareTestData() {
-        getWebDriver().get("https://google.com");
+        driver.get("https://google.com");
     }
 
 }
