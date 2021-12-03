@@ -3,6 +3,8 @@ package com.customertimes.tests;
 import com.customertimes.framework.pages.HomePage;
 import com.customertimes.model.User;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,6 +13,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.lang.reflect.Method;
 
 
@@ -22,7 +25,6 @@ public class TwentyFirstCenturyTest extends BaseTest {
 
     @BeforeClass
     public void beforeClassMethod() {
-        //driver = WebDriverRunner.getWebDriver();
         homePage = new HomePage(driver);
         user = User.newBuilder().withEmail(email).withPassword(password).build();
         driver.get(TWENTY_FIRST_CENTURY_URL);
@@ -35,6 +37,7 @@ public class TwentyFirstCenturyTest extends BaseTest {
                 .clickLoginButton()
                 .loginAs(user)
                 .clickAccountButton();
+        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         Assert.assertTrue(homePage.doesUserSubtitleSpanContainEmail(user.getEmail()),
                 String.format("User subtitle span should contain '%s' email", user.getEmail()));
     }

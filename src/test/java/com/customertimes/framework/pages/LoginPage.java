@@ -4,17 +4,25 @@ import com.customertimes.model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.customertimes.framework.driver.WebDriverRunner.getWebDriver;
 
 public class LoginPage extends AbstractPage {
 
-    private static String emailInput = "//div[@class='style_inputContainer__2tRgM undefined']/input[@label='Электронная почта']";
-    private static String passwordInput = "//div[@class='style_inputContainer__2tRgM undefined']/input[@label='Пароль']";
-    private static String submitAuthorizationButton = "//div[@class='style_actions__2mIsz']/button";
+    @FindBy(xpath = "//div[@class='style_inputContainer__2tRgM undefined']/input[@label='Электронная почта']")
+    private WebElement emailInput;
 
+    @FindBy(xpath = "//div[@class='style_inputContainer__2tRgM undefined']/input[@label='Пароль']")
+    private WebElement passwordInput;
+
+    @FindBy(xpath = "//div[@class='style_actions__2mIsz']/button")
+    private WebElement submitAuthorizationButton;
+
+    By submitAuthorizationButtonLocator = By.xpath("//div[@class='style_actions__2mIsz']/button");
 
     WebDriverWait wait;
 
@@ -22,6 +30,7 @@ public class LoginPage extends AbstractPage {
 
         super(driver);
         wait = new WebDriverWait(driver, TIME_OUT);
+        PageFactory.initElements(driver, this);
     }
 
     @Override
@@ -29,22 +38,22 @@ public class LoginPage extends AbstractPage {
     }
 
     public void enterEmail(String email) {
-        driver.findElement(By.xpath(emailInput)).clear();
-        driver.findElement(By.xpath(emailInput)).sendKeys(email);
+        emailInput.clear();
+        emailInput.sendKeys(email);
     }
 
     public void enterPassword(String password) {
-        driver.findElement(By.xpath(passwordInput)).clear();
-        driver.findElement(By.xpath(passwordInput)).sendKeys(password);
+        passwordInput.clear();
+        passwordInput.sendKeys(password);
     }
 
     public void submitCredentials() {
-        driver.findElement(By.xpath(submitAuthorizationButton)).click();
+        submitAuthorizationButton.click();
     }
 
     public HomePage waitForSubmitAuthorizationButtonDisappear() {
         try{
-            wait.until(ExpectedConditions.stalenessOf(driver.findElement(By.xpath(submitAuthorizationButton))));
+            wait.until(ExpectedConditions.numberOfElementsToBe(submitAuthorizationButtonLocator, 0));
             return new HomePage(driver);
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException("'Submit Authorization' Button was not found");
@@ -54,7 +63,7 @@ public class LoginPage extends AbstractPage {
 
 
     public HomePage loginAs(User user) {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(submitAuthorizationButton)));
+        wait.until(ExpectedConditions.elementToBeClickable(submitAuthorizationButton));
         enterEmail(user.getEmail());
         enterPassword(user.getPassword());
         submitCredentials();
