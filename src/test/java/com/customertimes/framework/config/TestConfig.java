@@ -10,6 +10,11 @@ public interface TestConfig extends Config {
 
     @DefaultValue("chrome")
     String browser();
+
+    Boolean remote();
+    @Key("selenium.server.url")
+    String seleniumServerUrl();
+
     String email();
     String password();
 }

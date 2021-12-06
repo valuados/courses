@@ -37,7 +37,7 @@ public class TwentyFirstCenturyTest extends BaseTest {
                 .clickLoginButton()
                 .loginAs(user)
                 .clickAccountButton();
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        //File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         Assert.assertTrue(homePage.doesUserSubtitleSpanContainEmail(user.getEmail()),
                 String.format("User subtitle span should contain '%s' email", user.getEmail()));
     }
