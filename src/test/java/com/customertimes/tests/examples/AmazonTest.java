@@ -22,17 +22,16 @@ public class AmazonTest extends BaseTest {
     @Test(dataProvider = "test1")
     public void checkSiteTitle(String expectedTitle) {
         SoftAssert soft = new SoftAssert();
-        driver.get("https://www.amazon.com/");
-        driver.get("https://www.amazon.com/");
+        getDriver().get("https://www.amazon.com/");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String actualTitle = driver.getTitle();
+        String actualTitle = getDriver().getTitle();
         soft.assertEquals(actualTitle, expectedTitle, "Page title[" + actualTitle + "] is not equal to - " + expectedTitle);
 
-        System.out.println(driver.findElement(By.xpath("//span[text()='English']")).isDisplayed());
+        System.out.println(getDriver().findElement(By.xpath("//span[text()='English']")).isDisplayed());
         System.out.println(TestConfig.CONFIG.email());
 
         soft.assertAll();

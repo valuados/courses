@@ -15,7 +15,6 @@ import static com.customertimes.framework.driver.WebDriverRunner.getWebDriver;
 
 public class BaseTest {
 
-    protected WebDriver driver;
     protected WebDriverWait wait;
     protected SoftAssert soft;
     protected String email = TestConfig.CONFIG.email();
@@ -24,15 +23,18 @@ public class BaseTest {
     @BeforeSuite(alwaysRun = true)
     public void setup() {
         System.out.println("Tests automation is started");
-        driver = getWebDriver();
         soft = new SoftAssert();
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
 
         System.out.println("Tests automation is ended");
         WebDriverRunner.closeWebDriver();
+    }
+
+    protected WebDriver getDriver() {
+        return WebDriverRunner.getWebDriver();
     }
 
 }

@@ -18,23 +18,23 @@ public class PageNavigationAndDropdownsTest extends BaseTest {
 
     @BeforeClass
     public void setup() {
-        driver.get(SELECT_EXAMPLE_WEB_SITE);
+        getDriver().get(SELECT_EXAMPLE_WEB_SITE);
     }
 
     @Test
     public void checkNavigateMethodTest() {
-        driver.navigate().to(SELECT_EXAMPLE_WEB_SITE + "/test/newtours/register.php");
-        WebElement dropdownPageHeaderElement = driver.findElement(By.xpath(COUNTRY_DROPDOWN_TITLE_LOCATOR));
+        getDriver().navigate().to(SELECT_EXAMPLE_WEB_SITE + "/test/newtours/register.php");
+        WebElement dropdownPageHeaderElement = getDriver().findElement(By.xpath(COUNTRY_DROPDOWN_TITLE_LOCATOR));
         Assert.assertTrue(dropdownPageHeaderElement.isDisplayed(), "Country header for 'Dropdown' page is not visible");
-        Select gender = new Select(driver.findElement(By.xpath(COUNTRY_SELECT_LOCATOR)));
+        Select gender = new Select(getDriver().findElement(By.xpath(COUNTRY_SELECT_LOCATOR)));
         gender.selectByIndex(1);
     }
 
 //    @AfterMethod(alwaysRun = true)
 //    public void afterMethodActions() {
-//        driver.navigate().refresh();
+//        getDriver().navigate().refresh();
 //        try{
-//            wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(DROPDOWN_PAGE_HEADER_LOCATOR))));
+//            wait.until(ExpectedConditions.visibilityOf(getDriver().findElement(By.xpath(DROPDOWN_PAGE_HEADER_LOCATOR))));
 //        }catch (TimeoutException e) {
 //            throw new TimeoutException("Page header for 'Dropdown' page was not found");
 //        }

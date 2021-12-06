@@ -25,9 +25,9 @@ public class TwentyFirstCenturyTest extends BaseTest {
 
     @BeforeClass
     public void beforeClassMethod() {
-        homePage = new HomePage(driver);
+        homePage = new HomePage(getDriver());
         user = User.newBuilder().withEmail(email).withPassword(password).build();
-        driver.get(TWENTY_FIRST_CENTURY_URL);
+        getDriver().get(TWENTY_FIRST_CENTURY_URL);
     }
 
     @Test(description = "Verify login to 21vek.by")
@@ -37,7 +37,7 @@ public class TwentyFirstCenturyTest extends BaseTest {
                 .clickLoginButton()
                 .loginAs(user)
                 .clickAccountButton();
-        //File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        //File screenshot = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
         Assert.assertTrue(homePage.doesUserSubtitleSpanContainEmail(user.getEmail()),
                 String.format("User subtitle span should contain '%s' email", user.getEmail()));
     }
@@ -46,16 +46,16 @@ public class TwentyFirstCenturyTest extends BaseTest {
     private void afterMethod(Method method) {
         switch (method.getName()) {
             case "loginToTwentyFirstCenturyTest":
-                driver.navigate().refresh();
-                waitForLoad(driver);
+                getDriver().navigate().refresh();
+                waitForLoad();
                 break;
             default:
                 System.out.println("All other tests");
         }
     }
 
-    void waitForLoad(WebDriver driver) {
-        new WebDriverWait(driver, 10).until((ExpectedCondition<Boolean>) wd ->
+    void waitForLoad() {
+        new WebDriverWait(getDriver(), 10).until((ExpectedCondition<Boolean>) wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 }
