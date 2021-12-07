@@ -1,6 +1,7 @@
 package com.customertimes.framework.pages;
 
 import com.customertimes.model.User;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -37,20 +38,24 @@ public class LoginPage extends AbstractPage {
     public void openPage() {
     }
 
+    @Step
     public void enterEmail(String email) {
         emailInput.clear();
         emailInput.sendKeys(email);
     }
 
+    @Step
     public void enterPassword(String password) {
         passwordInput.clear();
         passwordInput.sendKeys(password);
     }
 
+    @Step
     public void submitCredentials() {
         submitAuthorizationButton.click();
     }
 
+    @Step
     public HomePage waitForSubmitAuthorizationButtonDisappear() {
         try{
             wait.until(ExpectedConditions.numberOfElementsToBe(submitAuthorizationButtonLocator, 0));
@@ -62,6 +67,7 @@ public class LoginPage extends AbstractPage {
     }
 
 
+    @Step("Login as {0}")
     public HomePage loginAs(User user) {
         wait.until(ExpectedConditions.elementToBeClickable(submitAuthorizationButton));
         enterEmail(user.getEmail());

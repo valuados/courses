@@ -19,7 +19,7 @@ public class AmazonTest extends BaseTest {
     }
 
 
-    @Test(dataProvider = "test1")
+    //@Test(dataProvider = "test1")
     public void checkSiteTitle(String expectedTitle) {
         SoftAssert soft = new SoftAssert();
         getDriver().get("https://www.amazon.com/");

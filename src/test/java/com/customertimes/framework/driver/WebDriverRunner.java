@@ -30,12 +30,23 @@ public class WebDriverRunner {
                 case "safari": {
                     WebDriverManager.safaridriver().setup();
                     driver.set(new FirefoxDriver());
-//                    driver = new EventFiringWebDriver(new SafariDriver());
                     break;
                 }
                 default: {
-                    WebDriverManager.chromedriver().setup();
-                    driver.set(new ChromeDriver());
+//                    if (TestConfig.CONFIG.remote()) {
+//                        try {
+//                            //System.setProperty("webdriver.chrome.driver","/Users/valuados/selenium/drivers/chromedriver");
+//                            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+//                            capabilities.setPlatform(Platform.WINDOWS);
+//                            driver.set(new RemoteWebDriver(new URL(TestConfig.CONFIG.seleniumServerUrl()), capabilities));
+//                        } catch (MalformedURLException e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+                        WebDriverManager.chromedriver().setup();
+                        driver.set(new ChromeDriver());
+//                    driver = new EventFiringWebDriver(new ChromeDriver());
+                   // }
                 }
             }
             driver.get().manage().window().maximize();

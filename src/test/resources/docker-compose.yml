@@ -1,0 +1,21 @@
+version: '3'
+services:
+  chrome:
+    image: selenium/node-chrome-debug:3.141.59-zirconium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - hub
+    environment:
+      NODE_MAX_SESSION: 4
+      NODE_MAX_INSTANCES: 4
+      HUB_HOST: hub
+    ports:
+      - "5900-5910:5900"
+  
+  hub:
+    image: selenium/hub
+    ports:
+      - "4444:4444"
+    environment:
+       GRID_TIMEOUT: 240

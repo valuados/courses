@@ -24,21 +24,20 @@ public class GoogleTest extends BaseTest {
 
     @BeforeClass
     public void setup() {
-        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         soft = new SoftAssert();
         wait = new WebDriverWait(getDriver(), 5);
         prepareTestData();
     }
 
-    @Test
+    //@Test
     public void emptyTest() {
         System.out.println("Empty test");
     }
 
-    @Test(description = "Open Google webpage", dependsOnMethods = "emptyTest")
+    //@Test(description = "Open Google webpage", dependsOnMethods = "emptyTest")
     public void openGoogleTest() {
         try {
-            Thread.sleep(1_000);
+            Thread.sleep(5_000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

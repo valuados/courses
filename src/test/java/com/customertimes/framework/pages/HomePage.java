@@ -1,6 +1,7 @@
 package com.customertimes.framework.pages;
 
 import com.customertimes.model.User;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -35,13 +36,14 @@ public class HomePage extends AbstractPage {
     public void openPage() {
     }
 
-
+    @Step("Click Account Button")
     public HomePage clickAccountButton() {
         wait.until(ExpectedConditions.elementToBeClickable(accountButton));
         accountButton.click();
         return this;
     }
 
+    @Step
     public  LoginPage clickLoginButton() {
         wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
