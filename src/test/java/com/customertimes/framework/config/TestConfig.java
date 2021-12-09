@@ -12,9 +12,13 @@ public interface TestConfig extends Config {
     String browser();
 
     Boolean remote();
+
     @Key("selenium.server.url")
     String seleniumServerUrl();
 
     String email();
     String password();
+
+    @DefaultValue("https://www.21vek.by")
+    String baseUrl();
 }

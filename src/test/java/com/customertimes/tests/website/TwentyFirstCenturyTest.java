@@ -4,11 +4,11 @@ import com.customertimes.framework.listeners.TestListener;
 import com.customertimes.framework.pages.HomePage;
 import com.customertimes.model.User;
 import com.customertimes.tests.BaseTest;
-import io.qameta.allure.*;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -17,7 +17,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.lang.reflect.Method;
 
 @Epic("Sing in")
@@ -37,9 +36,8 @@ public class TwentyFirstCenturyTest extends BaseTest {
     }
 
     @Feature("Login")
-    @Test(description = "Verify login to 21vek.by")
+    @Test
     public void loginToTwentyFirstCenturyTest() {
-
         homePage.clickAccountButton()
                 .clickLoginButton()
                 .loginAs(user)

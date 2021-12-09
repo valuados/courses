@@ -39,20 +39,26 @@ public class LoginPage extends AbstractPage {
     }
 
     @Step
-    public void enterEmail(String email) {
+    public LoginPage enterEmail(String email) {
+        wait.until(ExpectedConditions.visibilityOf(emailInput));
         emailInput.clear();
         emailInput.sendKeys(email);
+        return this;
     }
 
     @Step
-    public void enterPassword(String password) {
+    public LoginPage enterPassword(String password) {
+        wait.until(ExpectedConditions.visibilityOf(passwordInput));
         passwordInput.clear();
         passwordInput.sendKeys(password);
+        return this;
     }
 
     @Step
-    public void submitCredentials() {
+    public LoginPage submitCredentials() {
+        wait.until(ExpectedConditions.elementToBeClickable(submitAuthorizationButton));
         submitAuthorizationButton.click();
+        return this;
     }
 
     @Step

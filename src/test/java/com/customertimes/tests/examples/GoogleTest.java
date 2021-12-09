@@ -29,12 +29,12 @@ public class GoogleTest extends BaseTest {
         prepareTestData();
     }
 
-    //@Test
+    @Test
     public void emptyTest() {
         System.out.println("Empty test");
     }
 
-    //@Test(description = "Open Google webpage", dependsOnMethods = "emptyTest")
+    @Test(description = "Open Google webpage", dependsOnMethods = "emptyTest")
     public void openGoogleTest() {
         try {
             Thread.sleep(5_000);

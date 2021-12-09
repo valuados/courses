@@ -21,7 +21,7 @@ public class PageNavigationAndDropdownsTest extends BaseTest {
         getDriver().get(SELECT_EXAMPLE_WEB_SITE);
     }
 
-    //@Test
+    @Test
     public void checkNavigateMethodTest() {
         getDriver().navigate().to(SELECT_EXAMPLE_WEB_SITE + "/test/newtours/register.php");
         WebElement dropdownPageHeaderElement = getDriver().findElement(By.xpath(COUNTRY_DROPDOWN_TITLE_LOCATOR));
